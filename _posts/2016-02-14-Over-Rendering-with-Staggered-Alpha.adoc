@@ -1,0 +1,3 @@
+= Over Rendering with Staggered Alpha
+A standard technique when visualizing large numbers of objects to render each with low opacity values and blend them together. Unfortunately this techniques can have some undesired consequences. When using a typical 32bit RGBA color scheme ypu only have acess to 256 opacity levels to begin with. If (because we need to blend many objects pixel)
+
