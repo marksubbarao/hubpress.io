@@ -6,14 +6,14 @@ We faced this problem when visualizing the orbits of Kuiper Belt Objects for the
 
 [source,C]
 ----
-	float alphaStagger = mod(gl_in[1].gl_Position.z,10.0)/2560.;//<1>
+	float alphaStagger = mod(gl_in[1].gl_Position.z,1.0)/256.;//<1>
 	color=vec4(1.0,0.5,0.1,orbitsAlpha*uv_fade-alphaStagger);//<2>
 ----
 <1> Generate a float between 0 and 1/256. Here we use a available variable to do this.
 <2> We subtract that from the alpha value so that alpha=0 behaves as expected
 
-The variable `gl_Position.z` corresponds to the orbit's Mean Anomoly, and the mathematical operation applied to it is as good as generating a randome number between 0 and 1/256.
+The variable `gl_Position.z` corresponds to the orbit's Mean Anomoly, and the mathematical operation applied to it is as good as generates a number that is essentially random between 0 and 1/256.
 
 Here is a video showing the fade on and fade off with and without staggered alpha values.
 
-video::tzCw-8jEYkA[youtube]
+video::HU2aY8dih64[youtube]
