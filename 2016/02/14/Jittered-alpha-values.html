@@ -23,7 +23,7 @@
     <meta property="og:description" content="Overdrawing is common problem when visualizing large datasets. One technique to overcome the overdrawing problem is to render each object (point, line, glyph, whatever) with a low opacity value, blending them all together. Unfortunately this techniques can have some negative..." />
     <meta property="og:url" content="https://marksubbarao.github.io/hubpress.io/2016/02/14/Jittered-alpha-values.html" />
     <meta property="article:published_time" content="2016-02-14T06:00:00.000Z" />
-    <meta property="article:modified_time" content="2016-02-15T20:48:51.813Z" />
+    <meta property="article:modified_time" content="2016-02-15T20:50:22.632Z" />
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Jittered alpha values" />
@@ -45,7 +45,7 @@
     "headline": "Jittered alpha values",
     "url": "https://marksubbarao.github.io/hubpress.io/2016/02/14/Jittered-alpha-values.html",
     "datePublished": "2016-02-14T06:00:00.000Z",
-    "dateModified": "2016-02-15T20:48:51.813Z",
+    "dateModified": "2016-02-15T20:50:22.632Z",
     "description": "Overdrawing is common problem when visualizing large datasets. One technique to overcome the overdrawing problem is to render each object (point, line, glyph, whatever) with a low opacity value, blending them all together. Unfortunately this techniques can have some negative..."
 }
     </script>
@@ -82,7 +82,7 @@
 <p>Overdrawing is common problem when visualizing large datasets. One technique to overcome the overdrawing problem is to render each object (point, line, glyph, whatever) with a low opacity value, blending them all together. Unfortunately this techniques can have some negative consequences, including difficulties when fading on and off the ensemble. When using a typical 32bit RGBA color scheme you only have acess to 256 opacity levels to begin with. If (because we need to blend many objects) we are rendering each with an alpha value of 0.1 or 0.05, then we only have a one or two dozen levels available. Fading on and off the ensemble will lead to a series of visual steps rather than a smooth fade on and fade off.</p>
 </div>
 <div class="paragraph">
-<p>We faced this problem when visualizing the orbits of Kuiper Belt Objects for the Planet Nine sky show.Roughly 1,200 orbits are visualized at the same time, each represented as an singlr pixel wide ellipse. Our solution to the staggered fade on/fade off problem was to jitter the alpha values of each object so that the transition between the 256 available values happens at a different time for each object. In our case rather than generating new data with random numbers for each orbit we uses data available to the graphics shader. In our case we perform the alpha jittering in the geometry shader. The code is below:</p>
+<p>We faced this problem when visualizing the orbits of Kuiper Belt Objects for the Planet Nine sky show.Roughly 1,200 orbits are visualized at the same time, each represented as an singlr pixel wide ellipse. Our solution to the staggered fade on/fade off problem was to jitter the alpha values of each object so that the transition between the 256 available values happens at a different time for each object. In our case rather than generating new data with random numbers for each orbit we use data already available to the graphics shader. Here we perform the alpha jittering in the geometry shader. The code is below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
