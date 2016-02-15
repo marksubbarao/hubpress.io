@@ -12,7 +12,7 @@ We faced this problem when visualizing the orbits of Kuiper Belt Objects for the
 <1> Generate a float between 0 and 1/256. Here we use a available variable to do this.
 <2> We subtract that from the alpha value so that alpha=0 behaves as expected
 
-The variable `gl_Position.z` corresponds to the orbit's Mean Anomoly, and the mathematical operation applied to it is as good as generates a number that is essentially random between 0 and 1/256.
+The variable `gl_Position.z` corresponds to the orbit's Mean Anomoly, and the mathematical operation applied to generates a number that is essentially random between 0 and 1/256.
 
 Here is a video showing the fade on and fade off with and without staggered alpha values.
 
