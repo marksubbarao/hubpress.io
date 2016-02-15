@@ -1,13 +1,19 @@
-= Jittered alpha values
+= Jittered alpha values 
 
-A standard technique when visualizing large numbers of objects to render each with low opacity values and blend them together. Unfortunately this techniques can have some undesired consequences. When using a typical 32bit RGBA color scheme ypu only have acess to 256 opacity levels to begin with. If (because we need to blend many objects pixel) we are rendering alpha vales of 0.1 or 0.05, then we only have a one or two dozen levels available. Fading on and off the ensemble will lead to a series of visual steps rather than a smooth fade on and fade off.
+Overdrawing is common problem when visualizing large datasets. One technique to overcome the overdrawing problem is to render each object (point, line, glyph, whatever) with a low opacity value, blending them all together. Unfortunately this techniques can have some negative consequences, including difficulties when fading on and off the ensemble. When using a typical 32bit RGBA color scheme you only have acess to 256 opacity levels to begin with. If (because we need to blend many objects) we are rendering each with an alpha value of 0.1 or 0.05, then we only have a one or two dozen levels available. Fading on and off the ensemble will lead to a series of visual steps rather than a smooth fade on and fade off.
 
-
+We faced this problem when visualizing the orbits of Kuiper Belt Objects for the Planet Nine sky show.Roughly 1,200 orbits are visualized at the same time, each represented as an singlr pixel wide ellipse. Our solution to the staggered fade on/fade off problem was to jitter the alpha values of each object so that the transition between the 256 available values happens at a different time for each object. In our case rather than generating new data with random numbers for each orbit we uses data available to the graphics shader. In our case we perform the alpha jittering in the geometry shader. The code is below:
 
 [source,C]
 ----
-	float alphaStagger = mod(gl_in[1].gl_Position.z,10.0)/256.;//<1>
+	float alphaStagger = mod(gl_in[1].gl_Position.z,10.0)/2560.;//<1>
 	color=vec4(1.0,0.5,0.1,orbitsAlpha*uv_fade-alphaStagger);//<2>
 ----
 <1> Generate a float between 0 and 1/256. Here we use a available variable to do this.
 <2> We subtract that from the alpha value so that alpha=0 behaves as expected
+
+The variable `gl_Position.z` corresponds to the orbit's Mean Anomoly, and the mathematical operation applied to it is as good as generating a randome number between 0 and 1/256.
+
+Here is a video showing the fade on and fade off with and without staggered alpha values.
+
+video::tzCw-8jEYkA[youtube]
