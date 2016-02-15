@@ -1,0 +1,13 @@
+= Over rendering with staggered alpha values
+
+A standard technique when visualizing large numbers of objects to render each with low opacity values and blend them together. Unfortunately this techniques can have some undesired consequences. When using a typical 32bit RGBA color scheme ypu only have acess to 256 opacity levels to begin with. If (because we need to blend many objects pixel) we are rendering alpha vales of 0.1 or 0.05, then we only have a one or two dozen levels available. Fading on and off the ensemble will lead to a series of visual steps rather than a smooth fade on and fade off.
+
+
+
+[source,C]
+----
+	float alphaStagger = mod(gl_in[1].gl_Position.z,10.0)/256.;//<1>
+	color=vec4(1.0,0.5,0.1,orbitsAlpha*uv_fade-alphaStagger);//<2>
+----
+<1> Generate a float between 0 and 1/256. Here we use a available variable to do this.
+<2> We subtract that from the alpha value so that alpha=0 behaves as expected
