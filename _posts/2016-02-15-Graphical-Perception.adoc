@@ -1,0 +1,11 @@
+= Graphical Perception
+
+I've been thinking about some talks that I have coming up, like the one at http://www.planetariomedellin.org/cap2016/english-version/press/press-releases/mark-subbarao-joins-the-cap2016/[CAP], and decided I should really do a better job describing some of the academic basis for making various design decisions. So I started making a Powerpoint slide (making full use of powerpoint graphics :)) describing the classic paper "Graphical Perception". This paper by Cleveland and McGill in 1984 was one of the first to take a quantitative approach to visualization perception, measuring how well people could estimate various quantities off a graph.
+
+.*_My Powerpoint slide describing the Cleveland and McGill Graphical Perception results_* 
+image::https://aruzqw.dm2303.livefilestore.com/y3m3OxSjzvVD5T-f6ZGcwkSfNGlDUOTn6w89EXCmXaxXz1wwec_N8CN48uiYZ12qFITl0uJTPxaO8NlCUgXbTBbv_DuHYCQdocC6wZiM6i5nYRA_HfBzdesMkp6ycVcpSkLp7_ra4C3zugeV_A3-SwKiymiLMMOhIpzAbHsjwgrCbk?width=1280&height=720&cropmode=none[]  
+
+The results of these measurements are not surprising, but they do lead to some useful rules of thumb (people measure position well, quantities such as length, area and angle somewhat worse, volume and curvature worse than that and quantities such as color very poorly. You can think of the sequence as corresponding  to the dimensionality of the quantities: zero, one, two, three. Color does terribly, but then again given how they were using color at the time, I'd look to newer studies in that regard.
+
+So the interesting thing to think about is how these quantities vary as you go from 2D to 3D. The problem with 3D is that a small thing nearby can seem the same size as a distant large thing (which is basically why infoViz people don't like 3D). So relative positions scale with distance. Length scales with distance. Area scales with distance squares, volume with distance cubed. Even color depends on the lighting of a 3D scene. But interestingly direction and angle don't scale with distance at all. Perhaps we should consider using these quantities more in 3D visualizations
+
